@@ -1,70 +1,133 @@
-# Getting Started with Create React App
+# Aplikasi Silsilah Keluarga
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplikasi web interaktif untuk memvisualisasikan dan mengelola silsilah keluarga.
 
-## Available Scripts
+## Fitur
 
-In the project directory, you can run:
+- Visualisasi pohon keluarga yang interaktif
+- Detail informasi anggota keluarga
+- Panel admin untuk mengelola data
+- Autentikasi pengguna
+- Responsive design
 
-### `npm start`
+## Teknologi yang Digunakan
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- JWT untuk autentikasi
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Frontend
+- React.js
+- Material-UI
+- React Force Graph untuk visualisasi
+- Axios untuk HTTP requests
 
-### `npm test`
+## Instalasi
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone repository
+```bash
+git clone <repository-url>
+cd family-tree-app
+```
 
-### `npm run build`
+2. Install dependensi backend
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Install dependensi frontend
+```bash
+cd client
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Buat file .env di root directory dengan konfigurasi berikut:
+```
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/family-tree
+JWT_SECRET=your-secret-key-here
+NODE_ENV=development
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. Jalankan MongoDB
+```bash
+mongod
+```
 
-### `npm run eject`
+6. Jalankan aplikasi
+```bash
+# Terminal 1 - Backend
+npm run dev
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Terminal 2 - Frontend
+cd client
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Penggunaan
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Buka browser dan akses `http://localhost:3000`
+2. Untuk mengakses panel admin, login di `http://localhost:3000/login`
+3. Gunakan panel admin untuk menambah, mengedit, atau menghapus anggota keluarga
+4. Visualisasi pohon keluarga akan otomatis diperbarui
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Struktur Database
 
-## Learn More
+### FamilyMember
+- name: String (required)
+- photo: String
+- birthDate: Date
+- deathDate: Date
+- gender: String (enum: 'male', 'female')
+- biography: String
+- contactInfo: {
+  email: String,
+  phone: String,
+  address: String
+}
+- relationships: [{
+  type: String (enum: 'spouse', 'parent', 'child', 'sibling'),
+  memberId: ObjectId (ref: 'FamilyMember')
+}]
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### User
+- username: String (required, unique)
+- email: String (required, unique)
+- password: String (required)
+- isAdmin: Boolean
+- createdAt: Date
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Deployment
 
-### Code Splitting
+1. Build frontend
+```bash
+cd client
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. Set environment variables di server production
+```
+PORT=5000
+MONGODB_URI=<your-mongodb-uri>
+JWT_SECRET=<your-secret-key>
+NODE_ENV=production
+```
 
-### Analyzing the Bundle Size
+3. Jalankan server
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Kontribusi
 
-### Making a Progressive Web App
+1. Fork repository
+2. Buat branch fitur (`git checkout -b feature/amazing-feature`)
+3. Commit perubahan (`git commit -m 'Add some amazing feature'`)
+4. Push ke branch (`git push origin feature/amazing-feature`)
+5. Buat Pull Request
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Lisensi
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT License 
