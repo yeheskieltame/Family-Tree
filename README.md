@@ -28,7 +28,7 @@ Aplikasi web interaktif untuk memvisualisasikan dan mengelola silsilah keluarga.
 
 1. Clone repository
 ```bash
-git clone (https://github.com/yeheskieltame/Family-Tree.git)
+git clone https://github.com/yeheskieltame/Family-Tree.git
 cd family-tree-app
 ```
 
